@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+{% extends 'base.html' %}
+{% block content %}
+<body>
+    <h1>강의 리스트</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>개설영역</th>
+                <th>학년</th>
+                <th>학수번호</th>
+                <th>교과목명</th>
+                <th>담당교수</th>
+                <th>학점</th>
+                <th>시간</th>
+                <th>강의시간</th>
+                <th>강의실</th>
+                <th>지원인원수</th>
+                <th>제한인원수</th>
+                <th>비고</th>
+                <th>별점</th>
+                <th>선택</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lecture in lectures %}
+            <tr>
+                <!-- <td><a href="https://wis.hufs.ac.kr/src08/jsp/lecture/syllabus.jsp?mode=print&ledg_year=2022&ledg_sessn=1&org_sect=A&lssn_cd={{ lecture.lecture_number}}">보기</a></td> -->
+                <td>{{lecture.area}}</td>
+                <td> {% if not lecture.year %}
+                        전학년
+                     {% else %}
+                        {{lecture.year}}
+                    {% endif %}
+                </td>
+                <td><a href="https://wis.hufs.ac.kr/src08/jsp/lecture/syllabus.jsp?mode=print&ledg_year=2022&ledg_sessn=1&org_sect=A&lssn_cd={{ lecture.lecture_number}}">{{lecture.lecture_number}}</a></td>
+                <td><a href="https://wis.hufs.ac.kr/src08/jsp/lecture/syllabus.jsp?mode=print&ledg_year=2022&ledg_sessn=1&org_sect=A&lssn_cd={{ lecture.lecture_number}}">{{lecture.lecture_name}}</a></td>
+                <td>{{lecture.professor}}</td>
+                <td>{{lecture.credit}}</td>
+                <td>{{lecture.time}}</td>
+                <td>{{lecture.lecture_time}}</td>
+                <td>{{lecture.lecture_room}}</td>
+                <td>{{lecture.apply_count}}</td>
+                <td>{{lecture.limit_count}}</td>
+                <td>{{lecture.note}}</td>
+                <td>{{lecture.star_point}}</td>
+                <td><input type="checkbox"></td>
+            </tr>   
+        {% endfor %}
+</tbody>
+</table>
+</body>
+{% endblock %}
+</html>
